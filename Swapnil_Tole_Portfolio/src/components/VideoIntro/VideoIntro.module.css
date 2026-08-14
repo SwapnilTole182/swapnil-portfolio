@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400;500;600&display=swap');
+
+/*
+  Token system
+  ------------
+  Background:    #0A0907   near-black, slight warmth (not pure #000)
+  Warm accent:   #FF7A38   practical / tungsten light
+  Warm dim:      #B5551E   deep amber, used in gradients/shadows
+  Cool glow:     #4C8FD1   monitor / screen-glow blue, used sparingly
+  Foreground:    #F6F2EA   warm-white text
+  Muted:         #B8B2A6   secondary text
+  Glass:         rgba(255,255,255,0.06) surfaces, rgba(255,255,255,0.14) borders
+
+  Display face:  Bricolage Grotesque (heavy weight) — has a slight
+                 idiosyncratic warmth in its curves, avoids the generic
+                 "Inter everywhere" look while staying legible at huge sizes.
+  Body/UI face:  Inter — quiet, gets out of the way.
+*/
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 560px;
+  overflow: hidden;
+  background: #0a0907;
+  isolation: isolate;
+}
+
+/* ---------------------------------------------------------------- */
+/* Video layers                                                      */
+/* ---------------------------------------------------------------- */
+
+.bgVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(38px) saturate(1.15) brightness(0.55);
+  transform: scale(1.15); /* hide blur edge artifacts */
+  opacity: 1;
+  z-index: 0;
+}
+
+.fgVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 1;
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------------- */
+/* Gradient / vignette overlays for legibility                       */
+/* ---------------------------------------------------------------- */
+
+.gradientOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(10, 9, 7, 0.75) 0%,
+      rgba(10, 9, 7, 0.25) 28%,
+      rgba(10, 9, 7, 0.35) 55%,
+      rgba(10, 9, 7, 0.92) 100%
+    ),
+    radial-gradient(
+      ellipse at 20% 100%,
+      rgba(181, 85, 30, 0.35) 0%,
+      rgba(181, 85, 30, 0) 55%
+    ),
+    radial-gradient(
+      ellipse at 100% 15%,
+      rgba(76, 143, 209, 0.18) 0%,
+      rgba(76, 143, 209, 0) 50%
+    );
+  pointer-events: none;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  box-shadow: inset 0 0 22vw rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+}
+
+.cinematicLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------- */
+/* Content                                                           */
+/* ---------------------------------------------------------------- */
+
+.content {
+  position: relative;
+  z-index: 4;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 clamp(24px, 6vw, 96px) clamp(96px, 14vh, 160px);
+  max-width: 1100px;
+}
+
+.eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(11px, 1.1vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #ff9a5c;
+  margin: 0 0 18px;
+}
+
+.name {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: clamp(56px, 11vw, 156px);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: #f6f2ea;
+  margin: 0 0 28px;
+  display: flex;
+  flex-direction: column;
+}
+
+.nameLine {
+  display: block;
+}
+
+.subtitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: clamp(15px, 1.6vw, 19px);
+  line-height: 1.55;
+  color: #cfc8ba;
+  max-width: 46ch;
+  margin: 0 0 40px;
+}
+
+/* ---------------------------------------------------------------- */
+/* Controls — glassmorphism buttons                                  */
+/* ---------------------------------------------------------------- */
+
+.controls {
+  display: flex;
+  gap: 12px;
+}
+
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  color: #f6f2ea;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.iconButton:hover {
+  background: rgba(255, 122, 56, 0.16);
+  border-color: rgba(255, 154, 92, 0.45);
+  transform: translateY(-2px);
+}
+
+.iconButton:active {
+  transform: translateY(0);
+}
+
+.iconButton:focus-visible {
+  outline: 2px solid #ff9a5c;
+  outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------- */
+/* Sound badge                                                       */
+/* ---------------------------------------------------------------- */
+
+.soundBadge {
+  position: absolute;
+  top: clamp(80px, 10vh, 100px);
+  right: clamp(20px, 4vw, 48px);
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(10, 9, 7, 0.4);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #f6f2ea;
+  font-family: 'Inter', sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+
+.soundBadgeDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ff7a38;
+  animation: pulseDot 1.8s ease-in-out infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+/* ---------------------------------------------------------------- */
+/* Scroll indicator                                                  */
+/* ---------------------------------------------------------------- */
+
+.scrollIndicator {
+  position: absolute;
+  bottom: clamp(28px, 5vh, 44px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #cfc8ba;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 100% 200%;
+  animation: scrollPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0% { background-position: 0 -100%; }
+  100% { background-position: 0 200%; }
+}
+
+.scrollLabel {
+  font-family: 'Inter', sans-serif;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------------- */
+/* Reduced motion                                                    */
+/* ---------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .soundBadgeDot,
+  .scrollLine {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* Responsive                                                        */
+/* ---------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .content {
+    padding: 0 20px 88px;
+  }
+
+  .name {
+    font-size: clamp(44px, 15vw, 72px);
+  }
+
+  .subtitle {
+    max-width: 34ch;
+  }
+
+  .soundBadge {
+    right: 16px;
+    top: 16px;
+    font-size: 11px;
+    padding: 8px 12px;
+  }
+}

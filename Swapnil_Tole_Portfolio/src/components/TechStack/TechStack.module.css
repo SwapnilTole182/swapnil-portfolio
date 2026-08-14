@@ -1,0 +1,124 @@
+.techStack {
+  min-height: 100vh;
+  background: #0a0907;
+  display: flex;
+  align-items: center;
+  padding: clamp(60px, 10vh, 120px) clamp(24px, 6vw, 96px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add a subtle background glow */
+.techStack::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -10%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle, rgba(181, 85, 30, 0.15) 0%, rgba(10, 9, 7, 0) 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  margin-bottom: clamp(40px, 8vh, 80px);
+}
+
+.title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: clamp(40px, 6vw, 64px);
+  color: #f6f2ea;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+
+.subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(16px, 1.6vw, 19px);
+  color: #b8b2a6;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 40px 32px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s ease, background 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 122, 56, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+}
+
+.cardTitle {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: #ff9a5c;
+  margin: 0 0 24px;
+  letter-spacing: -0.01em;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #f6f2ea;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 999px;
+  transition: all 0.3s ease;
+}
+
+.card:hover .tag {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.tag:hover {
+  background: #ff7a38 !important;
+  border-color: #ff7a38 !important;
+  color: #0a0907;
+  transform: scale(1.05);
+}
+
+@media (max-width: 640px) {
+  .techStack {
+    padding: 80px 20px;
+  }
+  
+  .card {
+    padding: 32px 24px;
+  }
+}

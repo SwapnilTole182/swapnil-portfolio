@@ -1,0 +1,64 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: clamp(20px, 4vh, 40px) clamp(24px, 6vw, 96px);
+  pointer-events: none;
+}
+
+.header * {
+  pointer-events: auto;
+}
+
+.logo {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  color: #f6f2ea;
+  letter-spacing: -0.02em;
+}
+
+.contactButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  color: #f6f2ea;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.contactButton:hover {
+  background: rgba(255, 122, 56, 0.16);
+  border-color: rgba(255, 154, 92, 0.45);
+  transform: translateY(-2px);
+}
+
+.contactButton:active {
+  transform: translateY(0);
+}
+
+.contactButton:focus-visible {
+  outline: 2px solid #ff9a5c;
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding: 20px 20px;
+  }
+}
